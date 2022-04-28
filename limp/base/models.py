@@ -38,7 +38,7 @@ class Compra(models.Model):
 
     def imprimir(self):
         return mark_safe(
-            """<a href-\"/orcament/%s/\" target="_blank"><img src=\"/static/images/b_print.png\"></a>"""
+            """<a href=\"/orcamento/%s/\" target="_blank"><img src=\"/static/images/b_print.png\"></a>"""
             % self.id
         )
 
@@ -57,7 +57,7 @@ class Produto(models.Model):
 
     def __str__(self):
         return (
-            self.material.name
+            self.material.nome
             + "R$"
             + str(self.preco)
             + ","
@@ -69,3 +69,9 @@ class Produto(models.Model):
     class Meta:
         verbose_name = "Produto"
         verbose_name_plural = "PRODUTOS"
+
+    def save(self, *args, **kwargs):
+        self.subtotal = self.preco * self.quantidade
+        self.compra.valor_compra += self.subtotal
+        self.compra.save()
+        return super(Produto, self).save(*args, **kwargs)
