@@ -7,7 +7,9 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     {% block titulo %}
+
     <title>Modelo</title>
+
     {% endblock %}
     <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
 </head>
@@ -25,14 +27,15 @@
     </div>
     {% endblock %}
 
-    {% block conteudo%}
     <div class="container">
+    {% block conteudo %}
+    
         <h3>Template de Modelo!</h3>
 
         <p>conteúdo do site</p>
-    </div>
     {% endblock %}
-
+    </div>
+    
     {% block rodape %}
     <div class="bg-light">
         Rodape
